@@ -6,5 +6,6 @@ namespace SitecoreSendProxy.Models.Track
     {
         public ActionType ActionType { get; set; }
         public TrackStatus Status { get; set; }
+        public object Details { get; set; }
     }
 }

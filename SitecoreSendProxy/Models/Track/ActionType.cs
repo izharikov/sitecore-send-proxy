@@ -8,5 +8,7 @@ namespace SitecoreSendProxy.Models.Track
         IDENTIFY,
         ADDED_TO_ORDER,
         ORDER_COMPLETED,
+        PAGE_VIEWED,
+        EXIT_INTENT,
     }
 }
