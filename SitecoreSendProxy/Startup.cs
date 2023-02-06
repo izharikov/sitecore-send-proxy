@@ -6,7 +6,9 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.OpenApi.Models;
+using Moosend.Wrappers.CSharpWrapper.Api;
 using SitecoreSendProxy.Extensions;
+using SitecoreSendProxy.Options;
 using SitecoreSendProxy.Services;
 using SitecoreSendProxy.Services.Razor;
 using SitecoreSendProxy.Services.Smtp;
@@ -30,7 +32,9 @@ namespace SitecoreSendProxy
             services.AddScoped<ITrackHttpService, TrackHttpService>();
             services.AddScoped<RazorViewService>();
             services.AddClient(Constants.ClientName);
+            services.Configure<MoosendOptions>(Configuration.GetSection("Moosend"));
             services.AddScoped<IEmailService, EmailService>();
+            services.AddScoped<ICampaignsApi, CampaignsApi>();
             services.AddControllers()
                 .AddJsonOptions(x => { x.JsonSerializerOptions.Converters.Add(new JsonStringEnumConverter()); });
             services.AddRouting (options => options.LowercaseUrls = true);

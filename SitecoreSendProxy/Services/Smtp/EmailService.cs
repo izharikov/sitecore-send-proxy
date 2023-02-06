@@ -18,13 +18,17 @@ namespace SitecoreSendProxy.Services.Smtp
         }
 
 
-        public async Task Send(string to, string subject, string html)
+        public async Task Send(string to, string subject, string html, string campaignId = null)
         {
             var from = _configuration.GetValue<string>("Smtp:From");
             var message = new MailMessage(from, to, subject, html)
             {
                 IsBodyHtml = true,
             };
+            if (!string.IsNullOrEmpty(campaignId))
+            {
+                message.Headers.Add("campaign_guid", campaignId);
+            }
             _logger.LogInformation("Send Email '{subject}' to {to} (from '{from}')", subject, to, from);
             using var smtp = CreateClient();
             await smtp.SendMailAsync(message);

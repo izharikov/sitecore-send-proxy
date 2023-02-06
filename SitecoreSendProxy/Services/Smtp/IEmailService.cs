@@ -4,6 +4,6 @@ namespace SitecoreSendProxy.Services.Smtp
 {
     public interface IEmailService
     {
-        Task Send(string to, string subject, string html);
+        Task Send(string to, string subject, string html, string campaignId = null);
     }
 }
