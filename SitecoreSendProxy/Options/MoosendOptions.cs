@@ -9,5 +9,6 @@
     public class MoosendCampaigns
     {
         public string OrderConfirmation { get; set; }
+        public string TrackOrderConfirmation { get; set; }
     }
 }

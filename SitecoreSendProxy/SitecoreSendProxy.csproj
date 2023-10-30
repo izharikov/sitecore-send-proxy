@@ -8,6 +8,7 @@
         <PackageReference Include="Moosend.Wrappers.CSharpWrapper" Version="3.0.0" />
         <PackageReference Include="Nustache" Version="1.16.0.10" />
         <PackageReference Include="Swashbuckle.AspNetCore" Version="5.6.3" />
+        <PackageReference Include="RestSharp" Version="108.0.1" />
     </ItemGroup>
 
 </Project>

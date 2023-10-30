@@ -31,8 +31,12 @@ namespace SitecoreSendProxy
             services.AddScoped<ITrackService, TrackService>();
             services.AddScoped<ITrackHttpService, TrackHttpService>();
             services.AddScoped<RazorViewService>();
+            services.AddScoped<ISitecoreSendService, SitecoreSendService>();
             services.AddClient(Constants.ClientName);
+            services.AddClient(Constants.SitecoreSendClient);
             services.Configure<MoosendOptions>(Configuration.GetSection("Moosend"));
+            services.Configure<MoosendSettings>(Configuration.GetSection("MoosendSettings"));
+            services.Configure<SmtpOptions>(Configuration.GetSection("Smtp"));
             services.AddScoped<IEmailService, EmailService>();
             services.AddScoped<ICampaignsApi, CampaignsApi>();
             services.AddControllers()

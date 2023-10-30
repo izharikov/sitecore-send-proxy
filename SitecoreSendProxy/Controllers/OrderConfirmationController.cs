@@ -2,7 +2,9 @@
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
+using Microsoft.Extensions.Options;
 using SitecoreSendProxy.Models.OrderConfirmation;
+using SitecoreSendProxy.Options;
 using SitecoreSendProxy.Services.Razor;
 using SitecoreSendProxy.Services.Smtp;
 
@@ -14,12 +16,15 @@ namespace SitecoreSendProxy.Controllers
         private readonly RazorViewService _razorViewService;
         private readonly IEmailService _emailService;
         private readonly ILogger<OrderConfirmationController> _logger;
+        private readonly MoosendOptions _options;
 
-        public OrderConfirmationController(RazorViewService razorViewService, IEmailService emailService, ILogger<OrderConfirmationController> logger)
+        public OrderConfirmationController(RazorViewService razorViewService, IEmailService emailService,
+            ILogger<OrderConfirmationController> logger, IOptions<MoosendOptions> options)
         {
             _razorViewService = razorViewService;
             _emailService = emailService;
             _logger = logger;
+            _options = options.Value;
         }
 
         [HttpPost]
@@ -36,7 +41,8 @@ namespace SitecoreSendProxy.Controllers
             var html = await _razorViewService.RenderPartialViewToString(this, Render(request));
             try
             {
-                await _emailService.Send(request.Order.FromUser.Email, $"Order Confirmation {request.Order.Id}", html);
+                await _emailService.Send(request.Order.FromUser.Email, $"Order Confirmation {request.Order.Id}", html,
+                    _options.Campaigns.TrackOrderConfirmation);
                 return new
                 {
                     Success = true

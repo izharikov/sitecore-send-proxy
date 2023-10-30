@@ -16,7 +16,8 @@ namespace SitecoreSendProxy.Controllers
         private readonly IEmailService _emailService;
         private readonly IOptions<MoosendOptions> _options;
 
-        public MoosendOrderController(ICampaignsApi campaignsApi, IEmailService emailService, IOptions<MoosendOptions> options)
+        public MoosendOrderController(ICampaignsApi campaignsApi, IEmailService emailService,
+            IOptions<MoosendOptions> options)
         {
             _campaignsApi = campaignsApi;
             _emailService = emailService;
@@ -47,7 +48,8 @@ namespace SitecoreSendProxy.Controllers
                     config.Campaigns.OrderConfirmation);
             var subject = Render.StringToString(campaign.Context.Subject, request);
             var html = Render.StringToString(campaign.Context.HTMLContent, request);
-            await _emailService.Send(request.Order.FromUser.Email, subject, html, config.Campaigns.OrderConfirmation);
+            await _emailService.Send(request.Order.FromUser.Email, subject, html,
+                config.Campaigns.TrackOrderConfirmation);
             return new ObjectResult(new
             {
                 Success = true,
