@@ -6,5 +6,7 @@ namespace SitecoreSendProxy.Models.OrderConfirmation
     {
         public string Currency { get; set; }
         public IList<ProductImage> Images { get; set; } = new List<ProductImage>();
+        public string SeoName { get; set; }
+        public string CategorySeoName { get; set; }
     }
 }

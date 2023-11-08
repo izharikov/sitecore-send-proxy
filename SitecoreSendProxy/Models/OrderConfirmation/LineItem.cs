@@ -15,5 +15,9 @@ namespace SitecoreSendProxy.Models.OrderConfirmation
         [JsonIgnore]
         public string ImageUrl => Product?.Xp?.Images?.Select(x => x.ThumbnailUrl)
             .FirstOrDefault(x => !string.IsNullOrEmpty(x));
+
+        [JsonIgnore]
+        public string ProductUrl =>
+            $"https://arabian-oud-demo.vercel.app/{Product?.Xp?.CategorySeoName}/{Product?.Xp?.SeoName}";
     }
 }

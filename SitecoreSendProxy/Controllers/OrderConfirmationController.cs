@@ -45,7 +45,7 @@ namespace SitecoreSendProxy.Controllers
                     _options.Campaigns.TrackOrderConfirmation);
                 return new
                 {
-                    Success = true
+                    Success = true,
                 };
             }
             catch (Exception e)
@@ -54,7 +54,7 @@ namespace SitecoreSendProxy.Controllers
                 return new
                 {
                     Message = e.Message,
-                    Success = false
+                    Success = false,
                 };
             }
         }

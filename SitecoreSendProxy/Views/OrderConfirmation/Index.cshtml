@@ -180,9 +180,11 @@
                                     {
                                         <tr>
                                             <td style="padding: 5px;">
-                                                <img src="@product.ImageUrl" alt="@product.Product?.Id">
+                                                <a href="@product.ProductUrl">
+                                                    <img src="@product.ImageUrl" alt="@product.Product?.Id">
+                                                </a>
                                             </td>
-                                            <td style="padding: 5px;"> @product.Product?.Name </td>
+                                            <td style="padding: 5px;"> <a href="@product.ProductUrl">@product.Product?.Name</a> </td>
                                             <td style="padding: 5px;"> @product.UnitPrice @Model.Currency </td>
                                             <td style="padding: 5px;"> @product.Quantity </td>
                                             <td style="padding: 5px;"> @product.LineTotal @Model.Currency </td>

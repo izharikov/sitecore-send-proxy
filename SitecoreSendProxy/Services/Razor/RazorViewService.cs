@@ -3,6 +3,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.AspNetCore.Mvc.ViewEngines;
+using Microsoft.AspNetCore.Mvc.ViewFeatures;
 using Microsoft.Extensions.Logging;
 
 namespace SitecoreSendProxy.Services.Razor
@@ -41,7 +42,7 @@ namespace SitecoreSendProxy.Services.Razor
                 controller.ViewData,
                 controller.TempData,
                 writer,
-                new()
+                new HtmlHelperOptions()
             );
 
             await viewResult.View.RenderAsync(viewContext);
