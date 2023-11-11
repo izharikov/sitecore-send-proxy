@@ -20,7 +20,7 @@ namespace SitecoreSendProxy.Services.Smtp
         }
 
 
-        public async Task Send(string to, string subject, string html, string campaignId = null)
+        public async Task Send(string to, string subject, string html, string campaignId = null, string listId = null)
         {
             var from = _smtpOptions.From;
             var message = new MailMessage(from, to, subject, html)
@@ -30,6 +30,11 @@ namespace SitecoreSendProxy.Services.Smtp
             if (!string.IsNullOrEmpty(campaignId))
             {
                 message.Headers.Add("campaign_guid", campaignId);
+            }
+
+            if (!string.IsNullOrEmpty(listId))
+            {
+                message.Headers.Add("mailing_list_id", listId);
             }
 
             _logger.LogInformation("Send Email '{subject}' to {to} (from '{from}')", subject, to, from);
